@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://tokiomarine/service/gen"
+           targetNamespace="http://tokiomarine/service/gen" elementFormDefault="qualified">           
+    <xs:element name="getGateWayRequest">
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="Username" type="xs:string"/>
+                <xs:element name="Password" type="xs:string"/>
+                <xs:element name="CompanyCode" type="xs:string"/>
+                <xs:element name="QusCompany" type="xs:string"/>
+                <xs:element name="AnsCompany" type="xs:string"/>
+                <xs:element name="ServiceCode" type="xs:string"/>
+                <xs:element name="ServiceCondition" type="tns:condition"/>
+                <xs:element name="RequestDatetime" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getGateWayResponse">
+        <xs:complexType>
+            <xs:sequence>
+            	<xs:element name="tx" type="xs:string"/>
+                <xs:element name="Status" type="xs:string"/>
+	            <xs:element name="QusCompany" type="xs:string"/>
+	            <xs:element name="AnsCompany" type="xs:string"/>
+	            <xs:element name="RequestDatetime" type="xs:string"/>
+	            <xs:element name="ResponseDatetime" type="xs:string"/>
+	            <xs:element name="ServiceCode" type="xs:string"/>
+	            <xs:element name="ServiceInformation" type="xs:string"/>
+	            <xs:element name="errors" type="xs:string"/>
+	            <xs:element name="RequestToCompanys" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>    
+    
+    <xs:complexType name="condition">
+        <xs:sequence>
+            <xs:element name="InsurerIdRq" type="xs:string"/>
+            <xs:element name="TransactionRequestDtRq" type="xs:string"/>
+            <xs:element name="RegistrationRq" type="xs:string"/>
+            <xs:element name="PaymentAmtRq" type="xs:string"/>
+            <xs:element name="UserRq" type="xs:string"/>
+            <xs:element name="InsurerIdRs" type="xs:string"/>
+            <xs:element name="PolicyNumberRs" type="xs:string"/>
+            <xs:element name="ClaimsOccurenceRs" type="xs:string"/>
+            <xs:element name="ChassisSerialNumberRs" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
