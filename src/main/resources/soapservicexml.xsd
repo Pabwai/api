@@ -37,13 +37,17 @@
         <xs:sequence>
             <xs:element name="InsurerIdRq" type="xs:string"/>
             <xs:element name="TransactionRequestDtRq" type="xs:string"/>
+            <xs:element name="LostDtRq" type="xs:string"/>
+            <xs:element name="PolicyNumberRq" type="xs:string"/>
+            <xs:element name="PolicyTypeCdRq" type="xs:string"/>
+            <xs:element name="ClaimsOccurenceRq" type="xs:string"/>        
             <xs:element name="RegistrationRq" type="xs:string"/>
             <xs:element name="PaymentAmtRq" type="xs:string"/>
             <xs:element name="UserRq" type="xs:string"/>
             <xs:element name="InsurerIdRs" type="xs:string"/>
             <xs:element name="PolicyNumberRs" type="xs:string"/>
             <xs:element name="ClaimsOccurenceRs" type="xs:string"/>
-            <xs:element name="ChassisSerialNumberRs" type="xs:string"/>
+            <xs:element name="RegistratinRs" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>
