@@ -26,11 +26,10 @@ public class WebServiceEndpiont {
 	public GetGateWayResponse getCountry(@RequestPayload GetGateWayRequest request) throws IOException {
 		GetGateWayResponse response = new GetGateWayResponse();	
 		Condition s = new Condition();
-		//String token = broadcastQuestion.SendingQuestion(request);	
-		System.out.println(request.getServiceCondition().toString());
-		JSONObject users = new JSONObject(request.getServiceCondition().toString());
-		System.out.println(users.toString());
-		response.setQusCompany("2");
+		String token = broadcastQuestion.SendingQuestion(request);	
+		//System.out.println(request.getServiceCondition().toString());
+		//String condi = request.getServiceCondition().toString();
+		response.setQusCompany(token);
 		return response;
 	}
 

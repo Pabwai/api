@@ -46,7 +46,9 @@ public class BroadcastQuestion {
 		map.put("password", data.getPassword());
 		map.put("companyCode", data.getCompanyCode());
 		JSONObject users = new JSONObject(map);
-		System.out.println(users);
+		
+		return getCondition(data,"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IkdXVXNyVGVzdC05OTk0fDEwLjExMC4xLjExMSIsIm5iZiI6MTY2ODQwODA0NywiZXhwIjoxNjY4NDA4MjI3LCJpYXQiOjE2Njg0MDgwNDd9.2Tx7P6J2M3xSkHrB_Otnom1pLCMzsXXOVKX2kFU-lSQ");
+		/*
 		HttpURLConnection con = (HttpURLConnection) new URL(ApiToken).openConnection();
 		con.setRequestMethod("POST");
 		con.setRequestProperty("Content-Type","application/json");
@@ -75,11 +77,17 @@ public class BroadcastQuestion {
 
 			// print result
 			System.out.println(response.toString());
+			
+			
+			getCondition(data,response.toString());
+			
+			
 			return response.toString();
 		} else {
 			System.out.println("POST request not worked");
 			return "POST request not worked";
 		}
+		*/
 	}
 	
 	public String getCondition(GetGateWayRequest data,String token ) throws MalformedURLException, IOException {
@@ -98,14 +106,22 @@ public class BroadcastQuestion {
 		map.put("qusCompany", data.getQusCompany());
 		map.put("ansCompany", data.getAnsCompany());
 		map.put("ServiceCode", data.getServiceCode().toCharArray().toString());
-		map.put("ServiceCondition", data.getCompanyCode());
+		map.put("ServiceCondition", data.getServiceCondition().toString());
 		map.put("RequestDatetime", data.getCompanyCode());
 		map.put("UserRequest", data.getUsername());
 		JSONObject users = new JSONObject(map);
+		//JSONObject obj = new JSONObject(token);
+		//String auth = obj.getString("token");
 		
+		System.out.println(map.toString());
+
+		
+		return map.toString();
+		
+		/*
 		HttpURLConnection con = (HttpURLConnection) new URL(ApiBroadcastOffline).openConnection();
 		con.setRequestMethod("POST");
-		con.setRequestProperty("Authorization","Bearer " + token);
+		con.setRequestProperty("Authorization","Bearer " + auth);
 		con.setRequestProperty("Content-Type","application/json");
 		
 		// For POST only - START
@@ -137,6 +153,8 @@ public class BroadcastQuestion {
 			System.out.println("POST request not worked");
 			return "POST request not worked";
 		}	
+		
+		*/
 		
 	}
 	

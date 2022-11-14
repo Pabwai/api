@@ -9,8 +9,13 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.KeyFactory;
 import java.security.KeyManagementException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,13 +23,16 @@ import java.security.cert.CertificateEncodingException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPublicKey;
+import java.security.spec.X509EncodedKeySpec;
 
 
 public class Thumbprint {	
 	
+	private static String privateKey = "src/main/resources/www-tmsthws4-com.pem";
 	
     public static void X509() throws CertificateException, IOException, NoSuchAlgorithmException {
-        X509Certificate certObject = getCertObject("src/main/resources/www-tmsthws4-com.pem");
+        X509Certificate certObject = getCertObject(privateKey);
         System.out.println(getThumbprint(certObject));
     }
 
@@ -39,6 +47,21 @@ public class Thumbprint {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         md.update(cert.getEncoded());
         return DatatypeConverter.printHexBinary(md.digest()).toLowerCase();
+    }
+    
+    public static RSAPublicKey readPublicKey() throws Exception {
+        String key = new String(Files.readAllBytes( (Path) new FileInputStream(privateKey)), Charset.defaultCharset());
+
+        String publicKeyPEM = key
+          .replace("-----BEGIN PUBLIC KEY-----", "")
+          .replaceAll(System.lineSeparator(), "")
+          .replace("-----END PUBLIC KEY-----", "");
+
+        byte[] encoded = Base64.decodeBase64(publicKeyPEM);
+
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(encoded);
+        return (RSAPublicKey) keyFactory.generatePublic(keySpec);
     }
     
     
