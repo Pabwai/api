@@ -1,7 +1,5 @@
 package com.tokiomarine.claim.api.model;
-import org.springframework.stereotype.Component;
 
-import tokiomarine.service.gen.Condition;
 import tokiomarine.service.gen.GetGateWayRequest;
 
 public class ReqestClaimModel {
@@ -11,22 +9,22 @@ public class ReqestClaimModel {
     private String companyCode;
     private String qusCompany;
     private String ansCompany;
-    private String serviceCode;
-    private Condition serviceCondition;
-    private String requestDatetime;   
- 
+    private String serviceCode;  
+	private String requestDatetime;   
     
+	ReqestClaimServiceCondition serviceCondition;
+	
 	public ReqestClaimModel(GetGateWayRequest getGateWayRequest) { 	
 		this.username = getGateWayRequest.getUsername();
 		this.password = getGateWayRequest.getPassword();
 		this.companyCode = getGateWayRequest.getCompanyCode();
 		this.qusCompany = getGateWayRequest.getQusCompany();
 		this.ansCompany = getGateWayRequest.getAnsCompany();
-		this.serviceCode = getGateWayRequest.getServiceCode();
-		this.serviceCondition = getGateWayRequest.getServiceCondition();		
+		this.serviceCode = getGateWayRequest.getServiceCode();		
 		this.requestDatetime = getGateWayRequest.getRequestDatetime();
 		
-		new ReqestClaimServiceCondition(serviceCondition);
+		this.serviceCondition = 
+				new ReqestClaimServiceCondition(getGateWayRequest.getServiceCondition());
 	}
 	
 	public String getUsername() {
@@ -47,14 +45,17 @@ public class ReqestClaimModel {
 	public String getServiceCode() {
 		return serviceCode;
 	}
-	public Condition getServiceCondition() {
-		return serviceCondition;
+	public String getServiceCondition() {		
+		return serviceCondition.toString();		
 	}
 	public String getRequestDatetime() {
 		return requestDatetime;
 	}
+	
+	
+	
 
-    
-    
+	
+	
     
 }

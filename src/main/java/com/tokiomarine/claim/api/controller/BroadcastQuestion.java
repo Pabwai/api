@@ -31,19 +31,18 @@ public class BroadcastQuestion {
 	public String SendingQuestion(ReqestClaimModel reqestClaimModel) throws IOException{			
 		this.reqestClaimModel = reqestClaimModel;
 			
-		this.token = getApiToken();
+		//this.token = getApiToken();
 		
 		
-		return "ok";
+		return getCondition();
 		
 	}
 	
 	public String getApiToken() {
-		Map<String, String> map = new HashMap<>();
-		map.put("username", reqestClaimModel.getUsername());
-		map.put("password", reqestClaimModel.getPassword());
-		map.put("companyCode", reqestClaimModel.getCompanyCode());
-		JSONObject getToken = new JSONObject(map);			
+		JSONObject getToken = new JSONObject();			
+		getToken.put("username", reqestClaimModel.getUsername());
+		getToken.put("password", reqestClaimModel.getPassword());
+		getToken.put("companyCode", reqestClaimModel.getCompanyCode());
 		
 		RestRequestHttp send = new RestRequestHttp();
 		
@@ -63,38 +62,31 @@ public class BroadcastQuestion {
 	}
 	
 	
+	public String getAnsCompanyPublicKey() {
+		
+		return "";
+	}
 	
 	
-	public String getCondition(GetGateWayRequest data,String token ) throws MalformedURLException, IOException {
+	public String getCondition(){	
+		JSONObject condition = new JSONObject();			
+		condition.put("tx", "");
+		condition.put("qusCompany", reqestClaimModel.getQusCompany());
+		condition.put("ansCompany", reqestClaimModel.getAnsCompany());
+		condition.put("ServiceCode", reqestClaimModel.getServiceCode());
+		condition.put("ServiceCondition", reqestClaimModel.getServiceCondition());
+		condition.put("RequestDatetime", reqestClaimModel.getRequestDatetime());
+		condition.put("UserRequest", reqestClaimModel.getUsername());
 		
-		try {
-			Thumbprint.disableSSLVerificationForHttps();
-		} catch (KeyManagementException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
 		
-		Condition condition = new Condition();
 		
-		Map<String, String> map = new HashMap<>();
-		map.put("TX", "null");
-		map.put("qusCompany", data.getQusCompany());
-		map.put("ansCompany", data.getAnsCompany());
-		map.put("ServiceCode", data.getServiceCode());
-		map.put("ServiceCondition", condition.toString());
-		map.put("RequestDatetime", data.getCompanyCode());
-		map.put("UserRequest", data.getUsername());
-		JSONObject users = new JSONObject(map);
-		//JSONObject obj = new JSONObject(token);
-		//String auth = obj.getString("token");
 		
-		System.out.println(map.toString());
-
 		
-		return map.toString();
+		
+		
+	
+		
+		return condition.toString();
 		
 		/*
 		HttpURLConnection con = (HttpURLConnection) new URL(ApiBroadcastOffline).openConnection();
