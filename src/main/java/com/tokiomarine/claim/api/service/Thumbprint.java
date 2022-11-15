@@ -1,4 +1,4 @@
-package com.tokiomarine.claim.api.config;
+package com.tokiomarine.claim.api.service;
 
 
 import javax.net.ssl.HostnameVerifier;
