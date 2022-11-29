@@ -48,6 +48,7 @@
             <xs:element name="PolicyNumberRs" type="xs:string"/>
             <xs:element name="ClaimsOccurenceRs" type="xs:string"/>
             <xs:element name="RegistratinRs" type="xs:string"/>
+            <xs:element name="ChassisSerialNumberRs" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

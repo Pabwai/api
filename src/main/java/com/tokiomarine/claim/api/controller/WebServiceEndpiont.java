@@ -37,7 +37,7 @@ public class WebServiceEndpiont {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		System.out.println(reqestClaimModel.getUsername() + "1");
+		
 		BroadcastQuestion broadcastQuestion = new BroadcastQuestion();
 		
 		//System.out.println(request.getServiceCondition().toString());

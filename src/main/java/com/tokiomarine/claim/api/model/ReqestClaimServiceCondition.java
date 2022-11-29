@@ -21,7 +21,7 @@ public class ReqestClaimServiceCondition {
     private String policyNumberRs;
     private String claimsOccurenceRs;
     private String registratinRs;
-    
+    private String chassisSerialNumberRs;
     public ReqestClaimServiceCondition() {
     	
     }
@@ -41,6 +41,7 @@ public class ReqestClaimServiceCondition {
 		this.policyNumberRs = condition.getPolicyNumberRs();
 		this.claimsOccurenceRs = condition.getClaimsOccurenceRs();
 		this.registratinRs = condition.getRegistratinRs();
+		this.chassisSerialNumberRs = condition.getChassisSerialNumberRs();
 	}
 
 
@@ -124,14 +125,24 @@ public class ReqestClaimServiceCondition {
 
 	@Override
 	public String toString() {
-		return "\"{\"insurerIdRq\":\"" + insurerIdRq + "\", transactionRequestDtRq\":\""
-				+ transactionRequestDtRq + "\", lostDtRq\":\"" + lostDtRq + "\", policyNumberRq\":\""
-				+ policyNumberRq + "\", policyTypeCdRq\":\"" + policyTypeCdRq + "\", claimsOccurenceRq\":\""
-				+ claimsOccurenceRq + "\", registrationRq\":\"" + registrationRq + "\", paymentAmtRq\":\""
-				+ paymentAmtRq + "\", userRq\":\"" + userRq + "\", insurerIdRs\":\"" + insurerIdRs
-				+ "\", policyNumberRs\":\"" + policyNumberRs + "\", claimsOccurenceRs\":\""
-				+ claimsOccurenceRs + "\", registratinRs\":\"" + registratinRs + "}";
-	}    
+		return "\"{\"insurerIdRq\":\"" + insurerIdRq + "\", \"transactionRequestDtRq\":\""
+				+ transactionRequestDtRq + "\", \"lostDtRq\":\"" + lostDtRq
+				+ "\", \"policyNumberRq\":\"" + policyNumberRq + "\", \"policyTypeCdRq\":\""
+				+ policyTypeCdRq + "\", \"claimsOccurenceRq\":\"" + claimsOccurenceRq
+				+ "\", \"registrationRq\":\"" + registrationRq + "\", \"paymentAmtRq\":\""
+				+ paymentAmtRq + "\", \"userRq\":\"" + userRq + "\", \"insurerIdRs\":\"" + insurerIdRs
+				+ "\", \"policyNumberRs\":\"" + policyNumberRs + "\", \"claimsOccurenceRs\":\""
+				+ claimsOccurenceRs + "\", \"registratinRs\":\"" + registratinRs
+				+ "\", \"chassisSerialNumberRs\":\"" + chassisSerialNumberRs + "\"\"}";
+	}
+
+
+	
+
+
+	
+
+
 	
 	
     
