@@ -29,7 +29,7 @@ public class RestRequestHttp {
 			// For POST only - END
 
 			int responseCode = con.getResponseCode();
-			System.out.println("POST Response Code :: " + responseCode);
+			System.out.println("RequestTokenApi POST Response Code :: " + responseCode);
 
 			if (responseCode == HttpURLConnection.HTTP_OK) { //success
 				BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -43,7 +43,7 @@ public class RestRequestHttp {
 				in.close();
 
 				// print result
-				System.out.println(response.toString());				
+				//System.out.println(response.toString());				
 				
 				return response.toString();
 			} else {
@@ -106,12 +106,13 @@ public class RestRequestHttp {
 	public String CreateRequst(String getUrl,String token,JSONObject restJson){
 		
 		try {
+
 			HttpURLConnection con = (HttpURLConnection) new URL(getUrl).openConnection();
-			
+
+			con.setRequestProperty("Authorization", "Bearer " + token);
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Content-Type","application/json");
-			con.setRequestProperty("Authorization", "Bearer " + token);
-			
+
 			// For POST only - START
 			con.setDoOutput(true);
 			OutputStream os = con.getOutputStream();
@@ -119,9 +120,9 @@ public class RestRequestHttp {
 			os.flush();
 			os.close();
 			// For POST only - END
-
+			System.out.println(os.toString());
 			int responseCode = con.getResponseCode();
-			System.out.println("POST Response Code :: " + responseCode);
+			System.out.println("CreateRequst POST Response Code :: " + responseCode);
 
 			if (responseCode == HttpURLConnection.HTTP_OK) { //success
 				BufferedReader in = new BufferedReader(new InputStreamReader(
