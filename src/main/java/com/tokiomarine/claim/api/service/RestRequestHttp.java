@@ -71,7 +71,7 @@ public class RestRequestHttp {
 			
 
 			int responseCode = con.getResponseCode();
-			System.out.println("GET Response Code :: " + responseCode);
+		//	System.out.println("GET Response Code :: " + responseCode);
 
 			if (responseCode == HttpURLConnection.HTTP_OK) { //success
 				BufferedReader in = new BufferedReader(new InputStreamReader(

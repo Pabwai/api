@@ -1,9 +1,16 @@
 package com.tokiomarine.claim.api.controller;
 
 import java.io.IOException;
+import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import org.json.JSONException;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -23,7 +30,7 @@ public class WebServiceEndpiont {
 
 	@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getGateWayRequest")
 	@ResponsePayload
-	public GetGateWayResponse getCountry(@RequestPayload GetGateWayRequest request) throws IOException {
+	public GetGateWayResponse getCountry(@RequestPayload GetGateWayRequest request) throws IOException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, CertificateException, JSONException, IllegalBlockSizeException, BadPaddingException {
 		
 		ReqestClaimModel reqestClaimModel = new ReqestClaimModel(request);		
 		GetGateWayResponse response = new GetGateWayResponse();	
