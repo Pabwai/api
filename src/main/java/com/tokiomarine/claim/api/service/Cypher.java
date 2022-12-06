@@ -4,11 +4,14 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.security.PublicKey;
 import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPublicKey;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.UnrecoverableEntryException;
 import java.util.Enumeration;
@@ -30,24 +33,7 @@ import java.security.spec.RSAPrivateKeySpec;
 import java.security.spec.RSAPublicKeySpec;
 
 
-public class Cypher {
-
-	public static void saveKeyToFile(String fileName, BigInteger modulus, BigInteger exponent) throws IOException
-    {
-        ObjectOutputStream ObjOutputStream = new ObjectOutputStream(
-                new BufferedOutputStream(new FileOutputStream(fileName)));
-        try
-        {
-            ObjOutputStream.writeObject(modulus);
-            ObjOutputStream.writeObject(exponent);
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        } finally
-        {
-            ObjOutputStream.close();
-        }
-    }
+public class Cypher {	
 
     public static Key readKeyFromFile(String keyFileName) throws IOException
     {
@@ -86,8 +72,8 @@ public class Cypher {
         cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
         // Perform Encryption
-        //byte[] cipherText = cipher.doFinal(plainText.getBytes());
-        byte[] cipherText = blockCipher(plainText.getBytes(),Cipher.ENCRYPT_MODE,cipher);
+        byte[] cipherText = cipher.doFinal(plainText.getBytes());
+        //byte[] cipherText = blockCipher(plainText.getBytes(),Cipher.ENCRYPT_MODE,cipher);
 
         return cipherText;
     }
@@ -120,7 +106,7 @@ public class Cypher {
         // toReturn will hold the total result
         byte[] toReturn = new byte[0];
         // if we encrypt we use 100 byte long blocks. Decryption requires 128 byte long blocks (because of RSA)
-        int length = (mode == Cipher.ENCRYPT_MODE)? 245 : 256;
+        int length = (mode == Cipher.ENCRYPT_MODE)? 2 : 256;
     
         // another buffer. this one will hold the bytes that have to be modified in this step
         byte[] buffer = new byte[length];
@@ -169,13 +155,14 @@ public class Cypher {
     }
 
 
-	public static PublicKey getPublicKey(String publicKeyBase64) throws CertificateException {		
+	public static PublicKey getPublicKey(String publicKeyBase64) throws CertificateException, IOException{		
 		
 		byte[] decodedBytes = Base64.decodeBase64(publicKeyBase64);        
-        java.security.cert.CertificateFactory certFactory = java.security.cert.CertificateFactory.getInstance("X.509");
+        java.security.cert.CertificateFactory certFactory = java.security.cert.CertificateFactory.getInstance("X.509");       
         InputStream in = new ByteArrayInputStream(decodedBytes);
-        X509Certificate certificate = (X509Certificate)certFactory.generateCertificate(in);    		
-		
+        X509Certificate certificate = (X509Certificate)certFactory.generateCertificate(in);        
+        
+        RSAPublicKey key = (RSAPublicKey)certificate.getPublicKey();       
 		return certificate.getPublicKey();
 		
 	}
@@ -230,6 +217,23 @@ public class Cypher {
 		return null;
 		
 	}	
+
+    public static void saveKeyToFile(String fileName, BigInteger modulus, BigInteger exponent) throws IOException
+    {
+        ObjectOutputStream ObjOutputStream = new ObjectOutputStream(
+                new BufferedOutputStream(new FileOutputStream(fileName)));
+        try
+        {
+            ObjOutputStream.writeObject(modulus);
+            ObjOutputStream.writeObject(exponent);
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        } finally
+        {
+            ObjOutputStream.close();
+        }
+    }
 	
 	//  public PublicKey CertificateFactory(String publicKeyBase64) throws CertificateException {		
 		
