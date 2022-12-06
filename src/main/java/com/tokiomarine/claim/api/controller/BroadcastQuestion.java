@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import com.tokiomarine.claim.api.model.ReqestClaimModel;
-import com.tokiomarine.claim.api.model.ReqestClaimServiceCondition;
 import com.tokiomarine.claim.api.service.Cypher;
 import com.tokiomarine.claim.api.service.RestRequestHttp;
 import com.tokiomarine.claim.api.service.SHA256;
@@ -29,7 +28,7 @@ public class BroadcastQuestion {
 	//private String ApiToken = "https://tgiagateway.herokuapp.com/token";
     private String ApiBroadcast = "https://api-test.insure.co.th/QuestionService/BroadcastQuestion/";
 	//private String ApiBroadcast = "https://tgiagateway.herokuapp.com/QuestionService/BroadcastQuestion";
-    private String ApiBroadcastOffline = "https://api-test.insure.co.th/QuestionService/OfflineBroadcastQuestion/";
+    //private String ApiBroadcastOffline = "https://api-test.insure.co.th/QuestionService/OfflineBroadcastQuestion/";
     private String ApiAnsCompanyPublicKey = "https://api-test.insure.co.th/PKI/PublicKey";  	
  	ReqestClaimModel reqestClaimModel;
   

@@ -2,7 +2,6 @@ package com.tokiomarine.claim.api;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.security.InvalidKeyException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -24,7 +23,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -44,8 +42,6 @@ public class CertInformation {
 	static String publicKeysString = "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";
     static String plainText  = "{\"InsurerIdRq\":\"TID4\",\"TransactionRequestDtRq\":\"2565-12-02\",\"LossDtRq\":\"2565-12-02\",\"PolicyNumberRq\":\"PO/ATID4-21-000001\",\"PolicyTypeCdRq\":\"1\",\"ClaimsOccurenceRq\":\"CL/ATID4-21-000001\",\"RegistrationRq\":\"5กณ2519\",\"PaymentAmtRq\":0.0,\"UserRq\":\"TID4\",\"InsurerIdRs\":\"TID2\",\"PolicyNumberRs\":\"\",\"ClaimsOccurenceRs\":\"\",\"RegistrationRs\":\"\",\"ChassisSerialNumberRs\":\"\"}";
     //static String plainText  = "Hello";
-
-
     
     public static void main(String[] args) throws Exception
     {
